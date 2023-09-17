@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def LIF(I, C, R, Vth, Vreset, duration, plot=False):
+def FLIF(I, C, R, Vth, Vreset, duration, plot=False):
     # Input parameters:
     # I: Input current
     # C: Membrane capacitance
@@ -43,7 +43,7 @@ input_currents = np.linspace(0.2, 2.0, 10)  # Vary the input current from 0.2 to
 firing_rates = []
 
 for I in input_currents:
-    firing_rate = LIF(I, 1.0, 1.0, 1.0, 0.0, duration=1.0, plot=False)
+    firing_rate = FLIF(I, 1.0, 1.0, 1.0, 0.0, duration=1.0, plot=False)
     firing_rates.append(firing_rate)
 
 # Plot firing rate vs. input current
