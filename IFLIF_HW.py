@@ -34,15 +34,7 @@ LIF(1.0, 1.0, 1.0, 1.0, 0.0, True) #Reference above, def IF(I, C, R, Vth, Vreset
 
 #Question 3-4
 def FLIF(I, C, R, Vth, Vreset, duration, plot=False):
-    # Input parameters:
-    # I: Input current
-    # C: Membrane capacitance
-    # R: Membrane resistance
-    # Vth: Threshold voltage
-    # Vreset: Reset voltage
-    # duration: Duration of simulation
-    # plot: Boolean flag to plot the voltage vs. time
-
+    # where the parameters are: I = input, C = capacitance, R = resistance, Vth = Threshold voltage, Vreset = Reset voltage, and duration = duration of simulation
     dt = 0.01              # Set the timestep.
     num_steps = int(duration / dt)  # Number of time steps
     V = np.zeros(num_steps)
@@ -83,5 +75,38 @@ plt.plot(input_currents, firing_rates, marker='o')
 plt.xlabel('Input Current (I)')
 plt.ylabel('Firing Rate (Hz)')
 plt.title('Firing Rate vs. Input Current (LIF Neuron)')
+plt.grid(True)
+plt.show()
+
+##Questions 6: Quad LIF f-i curve
+def QIF_neuron(I, C, duration, dt):
+    num_steps = int(duration / dt)
+    V = np.zeros(num_steps)
+    V[0] = 0.0  # Initial condition for membrane potential
+
+    for step in range(1, num_steps):
+        dVdt = (V[step - 1] ** 2 + I) / C
+        V[step] = V[step - 1] + dt * dVdt
+         # Check for spike (reset when the potential reaches a threshold)
+        if V[step] >= 1.0:
+            V[step] = 0.0
+    t = np.arange(0, duration, dt)
+    return t, V
+# Simulation parameters
+I_values = [0.5, 1.0, 1.5]  # Input currents to test
+C = 1.0  # Membrane capacitance
+duration = 5.0  # Duration of simulation in seconds
+dt = 0.001  # Time step for simulation
+
+# Simulate the QIF neuron for different input currents
+plt.figure(figsize=(10, 6))
+for I in I_values:
+    t, V = QIF_neuron(I, C, duration, dt)
+    plt.plot(t, V, label=f'I = {I}')
+
+plt.xlabel('Time (s)')
+plt.ylabel('Membrane Potential (V)')
+plt.title('Quadratic Integrate-and-Fire (QIF) Neuron')
+plt.legend()
 plt.grid(True)
 plt.show()
