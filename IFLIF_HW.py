@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def IF(I, C, R, Vth, Vreset, plot = True):                
+#Question 1-2
+def LIF(I, C, R, Vth, Vreset, plot = True):                
     #Input important parameters, and an option to plot V vs t.
     #in which I = input current, C = membrane capacitance, R = membrane resistance
     dt=0.01                      #Set the timestep.
@@ -29,4 +30,6 @@ def IF(I, C, R, Vth, Vreset, plot = True):
         plt.title('Voltage vs Time')
         plt.show()
 
-IF(0.5, 1.0, 1.0, 1.0, 0.0, True) #Reference above, def IF(I, C, R, Vth, Vreset, plot = True)
+LIF(1.0, 1.0, 1.0, 1.0, 0.0, True) #Reference above, def IF(I, C, R, Vth, Vreset, plot = True)
+
+#Question 3-4
