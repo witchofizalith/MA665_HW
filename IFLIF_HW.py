@@ -32,7 +32,41 @@ def LIF(I, C, R, Vth, Vreset, plot = True):
 
 LIF(1.0, 1.0, 1.0, 1.0, 0.0, True) #Reference above, def IF(I, C, R, Vth, Vreset, plot = True)
 
-#Question 3-4
+#Question 3
+
+#Set the parameters
+def QIF(I, C, R, Vth, Vreset, duration, plot=False):
+  # where the parameters are: I = input, C = capacitance, R = resistance, Vth = Threshold voltage, Vreset = Reset voltage, and duration = duration of simulation
+  dt = 0.01       # Set the timestep.
+  num_steps = int(duration / dt) # Number of time steps
+  V = np.zeros(num_steps)
+  V[0] = 0.2       # Initial condition
+  spikes = 0       # Counter for spikes
+
+  for k in range(num_steps - 1):
+    # Modified voltage update equation with quadratic term
+    dVdt = (I - V[k] / R) / C + a * V[k] ** 2
+
+    V[k + 1] = V[k] + dt * dVdt
+
+    if V[k + 1] > Vth:      # Check if the voltage exceeds the threshold
+      V[k + 1] = Vreset  # Reset the voltage
+      spikes += 1
+
+  firing_rate = spikes / duration # Calculate firing rate
+
+  if plot:
+    t = np.arange(num_steps) * dt # Time axis
+    plt.plot(t, V)
+    plt.xlabel('Time (s)')
+    plt.ylabel('Voltage (V)')
+    plt.title(f'QIF Neuron Model (I = {I}, Firing Rate = {firing_rate} Hz)')
+    plt.grid(True)
+    plt.show()
+
+  return firing_rate
+
+#Question 4
 def FLIF(I, C, R, Vth, Vreset, duration, plot=False):
     # where the parameters are: I = input, C = capacitance, R = resistance, Vth = Threshold voltage, Vreset = Reset voltage, and duration = duration of simulation
     dt = 0.01              # Set the timestep.
