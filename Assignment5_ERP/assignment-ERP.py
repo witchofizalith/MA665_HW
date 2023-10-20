@@ -38,7 +38,9 @@ plt.colorbar()                              # Show voltage to color mapping
 plt.vlines(0.25, 1, 1000, 'k', lw=2)        # Indicate stimulus onset with line
 show()
 
-#  c.	Compute the ERP for these data, and plot the results. Do you observe an ERP (i.e., times at which the 95% confidence intervals do not include zero)? Include 95% confidence intervals in your ERP plot, and label the axes. Explain in a few sentences the results of your analysis, as you would to a collaborator who collected these data.
+#  c.	Compute the ERP for these data, and plot the results. 
+# Do you observe an ERP (i.e., times at which the 95% confidence intervals do not include zero)? 
+# Include 95% confidence intervals in your ERP plot, and label the axes. Explain in a few sentences the results of your analysis, as you would to a collaborator who collected these data.
 
 plt.plot(???)                               # Plot the ERP for each condition.
 xlabel(???)                                 # ... label the axes
